@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href="{% static 'css/blog.css' %}" rel="stylesheet">
+</head>
+<body>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="sidebar">
+        <h2> <a href="{% url 'home' %}">Ask-Answer</a></h2>
+        <h2><a href="">My tags</a> </h2>
+        {% if request.user.is_authenticated %}
+            <h2><a href="">Dashboard</a></h2>
+            <h2><a href="">Logout</a></h2>
+        {% else %}
+            <h2><a href="{% url 'signup' %}">Signup</a></h2>
+            <h2><a href="{% url 'login' %}">Login</a></h2>
+        {% endif %}
+
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline" action="" method="get">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </nav>
+    </div>
+</body>
+</html>

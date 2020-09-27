@@ -1,0 +1,26 @@
+<!docktype html>
+<html lang="en">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</html>
+{% extends 'base.html' %}
+{% block title %}{{ question.title }}{% endblock %}
+{% block content %}
+    <h1>{{ question.title }}</h1>
+    <p class="data">Published {{ question.added_at }} by {{ question.author }}</p>
+    {{ question.text }}
+    {% for answer in question.answer.all %}
+        <p>Answered {{ answer.added_at }} by {{ answer.author }}</p>
+	    <p>{{ answer.text }}</p>
+        {% empty %}
+            <p>Пока нет ответов</p>
+    {% endfor %}
+    {% if new_comment %}
+        <h2>Ваш комментарий был добавлен</h2>
+    {% else %}
+        <form action="." method="post">
+            {{ answer_form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Add answer"></p>
+        </form>
+    {% endif %}
+{% endblock %}

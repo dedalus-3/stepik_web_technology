@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Add question{% endblock %}
+
+{% block content %}
+    <h1>Задайте свой вопрос</h1>
+    <form action="/ask/" method="post">
+        {{ ask_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Задать вопрос"></p>
+    </form>
+{% endblock %}
